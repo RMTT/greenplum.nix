@@ -1,0 +1,5 @@
+{ }:
+
+{
+    devenv = import ./environment {}
+}
