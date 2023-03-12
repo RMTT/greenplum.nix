@@ -19,7 +19,8 @@
     ripgrep,
     tag ? "",
     makeFlags ? [],
-    configureFlags ? "" }:
+    configureFlags ? ""
+}:
 
 let
     buildDeps = [
