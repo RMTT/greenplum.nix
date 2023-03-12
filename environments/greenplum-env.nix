@@ -24,9 +24,6 @@ let
     git
     gh
     neovim
-    man
-    man-pages
-    pipenv
     gdb
   ];
 
