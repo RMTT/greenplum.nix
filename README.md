@@ -16,7 +16,7 @@ nix-env -qa "greenplum.*"
 
 To install greenplum db:
 ```
-nix-env -ia {greenplum version}
+nix-env -i {greenplum version}
 ```
 
 To start shell with specific greenplum version:
