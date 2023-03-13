@@ -34,7 +34,8 @@ let
 in
     shell {
         name = name;
-        buildInputs = devTools ++ gpDrvBuildInputs;
+        packages = devTools;
+        inputsFrom = [ greenplumDrv ];
         shellHook = ''
             cowsay -e ^^ ${hello_message}
         '';

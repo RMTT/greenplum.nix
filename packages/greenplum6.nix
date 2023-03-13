@@ -45,8 +45,8 @@ let
     ref = if tag == "" then "6X_STABLE" else "refs/tags/${tag}";
     src = import ./greenplum-patch.nix { stdenv = stdenv; ref = ref; buildPkgs = buildDeps; };
 
-    name = if tag == "" then "greenplum-db-${ref}" else "greenplum-db-${tag}";
     version = if tag == "" then "6X_STABLE" else tag;
+    name = "greenplum-db-${version}";
     defaultConfigureFlags = ''
         --with-libxml
         --enable-cassert

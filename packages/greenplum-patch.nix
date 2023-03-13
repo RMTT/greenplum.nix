@@ -11,6 +11,7 @@ in
 stdenv.mkDerivation {
     name = "greenplum-db-${ref}-source-patched";
     src = src;
+    ref = ref;
     buildInputs = buildPkgs;
     dontPatch = true;
     dontConfigure = true;
