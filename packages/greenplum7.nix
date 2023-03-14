@@ -46,7 +46,6 @@ let
     src = import ./greenplum-patch.nix { stdenv = stdenv; ref = ref; buildPkgs = buildDeps; };
 
     version = if tag == "" then "main" else tag;
-    name = "greenplum-db-${version}";
     defaultConfigureFlags = ''
         --with-libxml
         --enable-cassert
@@ -55,7 +54,7 @@ let
         CPPFLAGS="-std=c++14"
     '';
     greenplum7 = stdenv.mkDerivation {
-        name = name;
+        name = "greenplum-db";
         version = version;
         meta = with lib; {
             license = licenses.asl20;
