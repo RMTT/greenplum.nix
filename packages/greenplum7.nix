@@ -46,7 +46,7 @@ let
     src = import ./greenplum-patch.nix { stdenv = stdenv; ref = ref; buildPkgs = buildDeps; };
 
     version = if tag == "" then "main" else tag;
-    name = "greenplum-db-"${tag}";
+    name = "greenplum-db-${version}";
     defaultConfigureFlags = ''
         --with-libxml
         --enable-cassert
