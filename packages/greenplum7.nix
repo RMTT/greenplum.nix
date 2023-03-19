@@ -17,7 +17,8 @@
     stdenv,
     lib,
     ripgrep,
-    tag ? "",
+    version ? "main",
+    rev,
     makeFlags ? [],
     configureFlags ? ""
 }:
@@ -42,10 +43,12 @@ let
         ripgrep
     ];
 
-    ref = if tag == "" then "main" else "refs/tags/${tag}";
-    src = import ./greenplum-patch.nix { stdenv = stdenv; ref = ref; buildPkgs = buildDeps; };
+    src = fetchGit {
+        url = "https://github.com/greenplum-db/gpdb.git";
+        submodules = true;
+        rev = rev;
+    };
 
-    version = if tag == "" then "main" else tag;
     defaultConfigureFlags = ''
         --with-libxml
         --enable-cassert
@@ -53,6 +56,7 @@ let
         --with-pythonsrc_ext
         CPPFLAGS="-std=c++14"
     '';
+
     greenplum7 = stdenv.mkDerivation {
         name = "greenplum-db";
         version = version;
@@ -62,6 +66,7 @@ let
         system = builtins.currentSystem;
         src = src;
         makeFlags = makeFlags;
+        patchPhase = ./scripts/patch-shebang.sh;
         preConfigure = ''
             configureFlagsArray+=(${defaultConfigureFlags})
             configureFlagsArray+=(${configureFlags})

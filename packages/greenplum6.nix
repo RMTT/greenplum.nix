@@ -17,7 +17,8 @@
     stdenv,
     lib,
     ripgrep,
-    tag ? "",
+    version ? "6X_STABLE",
+    rev ? "",
     makeFlags ? [],
     configureFlags ? ""
 }:
@@ -42,10 +43,12 @@ let
         ripgrep
     ];
 
-    ref = if tag == "" then "6X_STABLE" else "refs/tags/${tag}";
-    src = import ./greenplum-patch.nix { stdenv = stdenv; ref = ref; buildPkgs = buildDeps; };
+    src = fetchGit {
+        url = "https://github.com/greenplum-db/gpdb.git";
+        submodules = true;
+        rev = rev;
+    };
 
-    version = if tag == "" then "6X_STABLE" else tag;
     defaultConfigureFlags = ''
         --with-libxml
         --enable-cassert
@@ -62,6 +65,7 @@ let
         system = builtins.currentSystem;
         src = src;
         makeFlags = makeFlags;
+        postUnpack = ./scripts/patch-shebang.sh;
         preConfigure = ''
             configureFlagsArray+=(${defaultConfigureFlags})
             configureFlagsArray+=(${configureFlags})
