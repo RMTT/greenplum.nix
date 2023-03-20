@@ -58,7 +58,7 @@ let
     '';
 in
     stdenv.mkDerivation {
-        name = "greenplum-db";
+        pname = "greenplum-db";
         version = version;
         meta = with lib; {
             license = licenses.asl20;
