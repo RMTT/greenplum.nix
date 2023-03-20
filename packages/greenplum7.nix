@@ -57,9 +57,11 @@ let
         CPPFLAGS="-std=c++14"
     '';
 
-    greenplum7 = stdenv.mkDerivation {
+in
+    stdenv.mkDerivation {
         name = "greenplum-db";
         version = version;
+
         meta = with lib; {
             license = licenses.asl20;
         };
@@ -73,5 +75,4 @@ let
         '';
         postFixup = ./scripts/patch-python-bin.sh;
         buildInputs = buildDeps;
-    };
-in greenplum7
+    }

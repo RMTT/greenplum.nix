@@ -56,7 +56,8 @@ let
         --with-pythonsrc_ext
         CPPFLAGS="-std=c++11"
     '';
-    greenplum6 = stdenv.mkDerivation {
+in
+    stdenv.mkDerivation {
         name = "greenplum-db";
         version = version;
         meta = with lib; {
@@ -72,5 +73,4 @@ let
         '';
         postFixup = ./scripts/patch-python-bin.sh;
         buildInputs = buildDeps;
-    };
-in greenplum6
+    }
