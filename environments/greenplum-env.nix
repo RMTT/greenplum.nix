@@ -6,6 +6,7 @@
     zsh,
     git,
     gh,
+    exa,
     neovim,
     gdb,
     _stdenv ? "",
@@ -23,11 +24,10 @@ let
     zsh
     git
     gh
+    exa
     neovim
     gdb
   ];
-
-  gpDrvBuildInputs = greenplumDrv.buildInputs;
 
   stdenv = if _stdenv == "" then greenplumDrv.stdenv else _stdenv;
   shell = mkShell.override {stdenv = stdenv;};
@@ -38,5 +38,6 @@ in
         inputsFrom = [ greenplumDrv ];
         shellHook = ''
             cowsay -e ^^ ${hello_message}
+            alias ls=exa
         '';
     }
