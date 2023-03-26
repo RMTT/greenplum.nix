@@ -34,6 +34,15 @@ Enter environment:
 nix develop greenplum#{greenplum version}
 ```
 
+#### Steps
+
++ set out environment to your prefix(default is `$(pwd)/outputs/out`
++ run `configurePhase`
++ run `buildPhase`
++ run `installPhase`
++ run `fixupPhase`
++ now gpdb has installed to `$out`
+
 ## FAQ
 
 #### Problem 1: cannot find locale
