@@ -1,7 +1,7 @@
 # Greenplum for nix
 
 ## Prerequisite
-Install [Nix](https://nixos.org/)
+Install [Nix](https://nixos.org/download.html#download-nix)
 
 ## Usage
 
@@ -32,3 +32,11 @@ Enter environment:
 ```shell
 nix develop greenplum#{greenplum version}
 ```
+
+## FAQ
+
+#### Problem 1: cannot find locale
+
+Solution:
++ set [locale_archive](https://nixos.wiki/wiki/Locales)
++ set ssh send environments: `LANG` `LC_ALL` `LOCALE_ARCHIVE` on **ssh client and server**
