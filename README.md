@@ -1,7 +1,8 @@
 # Greenplum for nix
 
 ## Prerequisite
-Install [Nix](https://nixos.org/download.html#download-nix)
++ Install [Nix](https://nixos.org/download.html#download-nix)
++ Enable [flakes](https://nixos.wiki/wiki/Flakes#Permanent)
 
 ## Usage
 
