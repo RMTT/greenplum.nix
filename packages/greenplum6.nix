@@ -66,7 +66,7 @@ in
         system = builtins.currentSystem;
         src = src;
         makeFlags = makeFlags;
-        postUnpack = ./scripts/patch-shebang.sh;
+        preBuild = ./scripts/patch-shebang.sh;
         preConfigure = ''
             configureFlagsArray+=(${defaultConfigureFlags})
             configureFlagsArray+=(${configureFlags})
