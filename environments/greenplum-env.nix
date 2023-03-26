@@ -36,6 +36,9 @@ in
         name = name;
         packages = devTools;
         inputsFrom = [ greenplumDrv ];
+
+        inherit (greenplumDrv) makeFlags preBuild preConfigure postFixup ;
+
         shellHook = ''
             cowsay -e ^^ ${hello_message}
             alias ls=exa
