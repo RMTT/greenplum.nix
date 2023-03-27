@@ -8,5 +8,4 @@ GPHOME=$(realpath "$SCRIPT_DIR"/..)
 binary="$1"
 shift
 
-echo $@
 "$binary" $@
