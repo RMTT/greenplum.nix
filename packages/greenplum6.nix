@@ -65,6 +65,7 @@ in
         };
         system = builtins.currentSystem;
         src = src;
+        GPCOMMAND = ./scripts/gpc.sh;
         makeFlags = makeFlags;
         preBuild = ./scripts/patch-shebang.sh;
         preConfigure = ''
@@ -72,5 +73,9 @@ in
             configureFlagsArray+=(${configureFlags})
         '';
         postFixup = ./scripts/patch-python-bin.sh;
+        postInstall = ''
+            cp "$GPCOMMAND" "$out"/bin/gpc
+            chmod u+x "$out"/bin/gpc
+        '';
         buildInputs = buildDeps;
     }
