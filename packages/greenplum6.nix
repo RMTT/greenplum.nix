@@ -18,7 +18,8 @@
     lib,
     ripgrep,
     version ? "6X_STABLE",
-    rev ? "",
+    rev,
+    ref ? "6X_STABLE",
     makeFlags ? [],
     configureFlags ? ""
 }:
@@ -47,6 +48,7 @@ let
         url = "https://github.com/greenplum-db/gpdb.git";
         submodules = true;
         rev = rev;
+        ref = ref;
     };
 
     defaultConfigureFlags = ''
