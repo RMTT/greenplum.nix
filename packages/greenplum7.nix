@@ -18,7 +18,7 @@
     lib,
     ripgrep,
     version ? "main",
-    rev,
+    rev ? "",
     ref ? "main",
     makeFlags ? [],
     configureFlags ? ""
@@ -44,12 +44,18 @@ let
         ripgrep
     ];
 
-    src = fetchGit {
-        url = "https://github.com/greenplum-db/gpdb.git";
-        submodules = true;
-        rev = rev;
-        ref = ref;
-    };
+    src = if rev == "" then
+        fetchGit {
+            url = "https://github.com/greenplum-db/gpdb.git";
+            submodules = true;
+            ref = ref;
+        } else
+        fetchGit {
+            url = "https://github.com/greenplum-db/gpdb.git";
+            submodules = true;
+            rev = rev;
+            ref = ref;
+        };
 
     defaultConfigureFlags = ''
         --with-libxml
