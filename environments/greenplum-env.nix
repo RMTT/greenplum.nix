@@ -37,7 +37,7 @@ in
         packages = devTools;
         inputsFrom = [ greenplumDrv ];
 
-        inherit (greenplumDrv) makeFlags preBuild preConfigure postFixup ;
+        inherit (greenplumDrv) makeFlags preBuild preConfigure postInstall postFixup ;
 
         shellHook = ''
             cowsay -e ^^ ${hello_message}

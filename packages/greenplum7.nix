@@ -17,6 +17,7 @@
     stdenv,
     lib,
     ripgrep,
+    makeWrapper,
     version ? "main",
     rev ? "",
     ref ? "main",
@@ -75,17 +76,14 @@ in
         };
         system = builtins.currentSystem;
         src = src;
-        GPCOMMAND = ./scripts/gpc.sh;
         makeFlags = makeFlags;
         preBuild = ./scripts/patch-shebang.sh;
         preConfigure = ''
             configureFlagsArray+=(${defaultConfigureFlags})
             configureFlagsArray+=(${configureFlags})
         '';
+        postInstall = ./scripts/make-wrapper.sh;
         postFixup = ./scripts/patch-python-bin.sh;
-        postInstall = ''
-            cp "$GPCOMMAND" "$out"/bin/gpc
-            chmod u+x "$out"/bin/gpc
-        '';
+        nativeBuildInputs = [ makeWrapper ];
         buildInputs = buildDeps;
     }

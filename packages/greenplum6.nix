@@ -17,6 +17,7 @@
     stdenv,
     lib,
     ripgrep,
+    makeWrapper,
     version ? "6X_STABLE",
     rev ? "",
     ref ? "6X_STABLE",
@@ -80,10 +81,8 @@ in
             configureFlagsArray+=(${defaultConfigureFlags})
             configureFlagsArray+=(${configureFlags})
         '';
+        postInstall = ./scripts/make-wrapper.sh;
         postFixup = ./scripts/patch-python-bin.sh;
-        postInstall = ''
-            cp "$GPCOMMAND" "$out"/bin/gpc
-            chmod u+x "$out"/bin/gpc
-        '';
+        nativeBuildInputs = [ makeWrapper ];
         buildInputs = buildDeps;
     }
