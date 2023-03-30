@@ -27,11 +27,6 @@ To start shell with specific greenplum version:
 nix shell greenplum#{greenplum version}
 ```
 
-Using `gpc` wrapper after install gpdb(do not need source greenplum_path.sh):
-```shell
-gpc gpstart -a
-```
-
 ### Use Greenplum development envrionment
 
 Enter environment:
