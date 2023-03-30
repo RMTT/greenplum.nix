@@ -74,7 +74,6 @@ in
         };
         system = builtins.currentSystem;
         src = src;
-        GPCOMMAND = ./scripts/gpc.sh;
         makeFlags = makeFlags;
         preBuild = ./scripts/patch-shebang.sh;
         preConfigure = ''
