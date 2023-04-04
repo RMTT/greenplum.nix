@@ -2,7 +2,7 @@
 
 let
     repo_pkgs = rec {
-        default = greenplum-db-main;
+        default = greenplum-db-7-0-0-beta-1;
 
         greenplum-db-6-23-4 = pkgs.callPackage ./greenplum6.nix {
             stdenv = pkgs.gcc8Stdenv;
@@ -10,16 +10,6 @@ let
             version = "6.23.4";
             ref = "6.23.x";
             rev = "9139fa887752a822b5f7010baa0dcf88233e7d7d";
-        };
-
-        greenplum-db-6X_STABLE = pkgs.callPackage ./greenplum6.nix {
-            stdenv = pkgs.gcc8Stdenv;
-            makeFlags = ["-j8"];
-        };
-
-        greenplum-db-main = pkgs.callPackage ./greenplum7.nix {
-            stdenv = pkgs.gcc12Stdenv;
-            makeFlags = ["-j8"];
         };
 
         greenplum-db-7-0-0-beta-1 = pkgs.callPackage ./greenplum7.nix {
