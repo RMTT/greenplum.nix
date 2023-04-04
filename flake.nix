@@ -16,7 +16,6 @@
                 {
                     packages = packages;
                     devShells = environments;
-                    hydraJobs.build = packages;
                 }
             );
 }
