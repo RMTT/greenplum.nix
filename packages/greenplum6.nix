@@ -18,6 +18,7 @@
     lib,
     ripgrep,
     makeWrapper,
+    srcUrl ? "https://github.com/greenplum-db/gpdb.git",
     version ? "6X_STABLE",
     rev ? "",
     ref ? "6X_STABLE",
@@ -47,12 +48,12 @@ let
 
     src = if rev == "" then
         fetchGit {
-            url = "https://github.com/greenplum-db/gpdb.git";
+            url = srcUrl;
             submodules = true;
             ref = ref;
         } else
         fetchGit {
-            url = "https://github.com/greenplum-db/gpdb.git";
+            url = srcUrl;
             submodules = true;
             rev = rev;
             ref = ref;
