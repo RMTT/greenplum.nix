@@ -10,4 +10,5 @@
     greenplumDrv = pkgs.greenplum-db-7-0-0-beta-1;
     name = "gpenv-main";
   };
+
 }
