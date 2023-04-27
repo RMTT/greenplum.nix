@@ -9,7 +9,7 @@ if [ -z "$stdenv" ]; then
 fi
 
 # source stdenv to use it's functons
-export noDumpEnvVars=1
+export NIX_BUILD_TOP=$(pwd)/build
 source $stdenv/setup
 
 help() {

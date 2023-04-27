@@ -25,6 +25,7 @@ let
 in shell {
   name = name;
   packages = devTools;
+  noDumpEnvVars=1;
   inputsFrom = [ greenplumDrv ];
 
   inherit (greenplumDrv) makeFlags preBuild preConfigure postInstall postFixup;
