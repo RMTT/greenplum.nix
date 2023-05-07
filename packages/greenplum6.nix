@@ -51,13 +51,13 @@ in stdenv.mkDerivation {
   system = builtins.currentSystem;
   src = src;
   makeFlags = makeFlags;
-  preBuild = ./scripts/patch-shebang.sh;
+  preBuild = ./scripts/pre-build-patch-shebang.sh;
   preConfigure = ''
     configureFlagsArray+=(${defaultConfigureFlags})
     configureFlagsArray+=(${configureFlags})
   '';
   postInstall = ./scripts/make-wrapper.sh;
-  postFixup = ./scripts/patch-python-bin.sh;
+  postFixup = ./scripts/patch-bin.sh;
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = buildDeps;
 }

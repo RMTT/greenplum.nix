@@ -1,5 +1,5 @@
-{ mkShell, gitui, htop, direnv, cowsay, exa, bear, openssh
-, _stdenv ? "", greenplumDrv, name }:
+{ mkShell, gitui, htop, direnv, cowsay, exa, bear, openssh, _stdenv ? ""
+, greenplumDrv, name }:
 
 let
   stdenv = if _stdenv == "" then greenplumDrv.stdenv else _stdenv;
@@ -25,8 +25,9 @@ let
 in shell {
   name = name;
   packages = devTools;
-  noDumpEnvVars=1;
+  noDumpEnvVars = 1;
   inputsFrom = [ greenplumDrv ];
+  dontStrip = true;
 
   inherit (greenplumDrv) makeFlags preBuild preConfigure postInstall postFixup;
 

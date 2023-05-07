@@ -24,3 +24,14 @@ for f in ${files[@]}; do
     echo "find 'python3 -c' in ${f}, will be replaced"
     sed -i "s%python3 -c%${newPythonBin} -c%g" "$f"
 done
+
+# patch /bin/bash in file content
+newBash=$(command -v bash)
+
+# files contain "/bin/bash"
+files=$(rg "/bin/bash" -l $out)
+
+for f in ${files[@]}; do
+    echo "find '/bin/bash' in ${f}, will be replaced"
+    sed -i "1 ! s%/bin/bash%${newBash}%g" "$f"
+done
