@@ -1,5 +1,5 @@
 { pkg-config, readline, zlib, zstd, apr, libevent, libxml2, bzip2, libyaml, curl
-, xercesc, perl, bison, flex, python2, stdenv, lib, ripgrep, makeWrapper
+, gp-xerces, perl, bison, flex, python2, stdenv, lib, ripgrep, makeWrapper
 , srcUrl ? "https://github.com/greenplum-db/gpdb.git", version ? "6X_STABLE"
 , rev ? "", ref ? "6X_STABLE", makeFlags ? [ ], configureFlags ? "" }:
 
@@ -15,7 +15,7 @@ let
     bzip2
     libyaml
     curl
-    xercesc
+    gp-xerces
     perl
     bison
     flex
@@ -42,7 +42,6 @@ let
     --enable-cassert
     --with-python
     --with-pythonsrc_ext
-    CPPFLAGS="-std=c++11"
   '';
 in stdenv.mkDerivation {
   pname = "greenplum-db";
