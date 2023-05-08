@@ -29,7 +29,7 @@ in shell {
   inputsFrom = [ greenplumDrv ];
   dontStrip = true;
 
-  inherit (greenplumDrv) makeFlags preBuild preConfigure postInstall postFixup;
+  inherit (greenplumDrv) makeFlags preConfigure postConfigure postInstall postFixup;
 
   shellHook = ''
     cowsay -e ^^ ${hello_message}
