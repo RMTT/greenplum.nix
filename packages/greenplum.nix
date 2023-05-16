@@ -1,10 +1,12 @@
 { pkg-config, readline, zlib, zstd, apr, libevent, libxml2, bzip2, curl, libyaml
-, gp-xerces, perl, bison, flex, python3, stdenv, lib, ripgrep, makeWrapper
-, srcUrl ? "https://github.com/greenplum-db/gpdb.git", version ? "main"
-, rev ? "", ref ? "main", makeFlags ? [ ], configureFlags ? "" }:
+, gp-xerces, perl, bison, flex, python2, python3, clangStdenv, gcc, lib, ripgrep
+, makeWrapper, srcUrl ? "https://github.com/greenplum-db/gpdb.git"
+, version ? "main", rev ? "", ref ? "main", makeFlags ? [ ], configureFlags ? ""
+}:
 
 let
   buildDeps = [
+		gcc # need gcc for python modules even we use clang to build greenplum
     pkg-config
     readline
     zlib
@@ -19,6 +21,7 @@ let
     perl
     bison
     flex
+    python2
     python3
     ripgrep
   ];
@@ -41,11 +44,11 @@ let
     --with-libxml
     --enable-cassert
     --with-python
-    --with-pythonsrc_ext
-    --enable-debug
+    --with-openssl
+		--with-pythonsrc-ext
   '';
 
-in stdenv.mkDerivation {
+in clangStdenv.mkDerivation {
   pname = "greenplum-db";
   version = version;
 

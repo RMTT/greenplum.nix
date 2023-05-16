@@ -4,10 +4,9 @@ let
   repo_pkgs = rec {
     default = greenplum-db-7-0-0-beta-1;
 
-    gp-xerces = pkgs.callPackage ./gp-xerces.nix {};
+    gp-xerces = pkgs.callPackage ./gp-xerces.nix { stdenv = pkgs.clangStdenv; };
 
-    greenplum-db-6-23-4 = pkgs.callPackage ./greenplum6.nix {
-      stdenv = pkgs.gcc8Stdenv;
+    greenplum-db-6-23-4 = pkgs.callPackage ./greenplum.nix {
       makeFlags = [ "-j8" ];
       version = "6.23.4";
       ref = "6.23.x";
@@ -15,16 +14,14 @@ let
       gp-xerces = gp-xerces;
     };
 
-    greenplum-db-7-0-0-beta-1 = pkgs.callPackage ./greenplum7.nix {
-      stdenv = pkgs.gcc12Stdenv;
+    greenplum-db-7-0-0-beta-1 = pkgs.callPackage ./greenplum.nix {
       makeFlags = [ "-j8" ];
       version = "7.0.0-beta.1";
       rev = "ba1d71c5513d2c45a286392e8cae9abc620376ad";
       gp-xerces = gp-xerces;
     };
 
-    greenplum-db-rg-io = pkgs.callPackage ./greenplum7.nix {
-      stdenv = pkgs.gcc12Stdenv;
+    greenplum-db-rg-io = pkgs.callPackage ./greenplum.nix {
       makeFlags = [ "-j8" ];
       version = "rg_io";
       srcUrl = "https://github.com/RMTT/gpdb.git";

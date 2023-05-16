@@ -1,5 +1,5 @@
 { mkShell, gitui, htop, direnv, cowsay, exa, bear, openssh, _stdenv ? ""
-, greenplumDrv, name }:
+, greenplumDrv, name, extraPkgs ? [ ] }:
 
 let
   stdenv = if _stdenv == "" then greenplumDrv.stdenv else _stdenv;
@@ -24,7 +24,7 @@ let
   shell = mkShell.override { stdenv = stdenv; };
 in shell {
   name = name;
-  packages = devTools;
+  packages = devTools ++ extraPkgs;
   noDumpEnvVars = 1;
   inputsFrom = [ greenplumDrv ];
   dontStrip = true;

@@ -11,7 +11,10 @@
       let
         pkgs = import nixpkgs {
           system = system;
-          config = { permittedInsecurePackages = [ "python-2.7.18.6" ]; };
+          config = {
+            permittedInsecurePackages =
+              [ "python-2.7.18.6" "python-2.7.18.6-env" ];
+          };
         };
         packages = import ./packages { pkgs = pkgs; };
         impures = import ./packages/impure.nix { pkgs = pkgs; };
