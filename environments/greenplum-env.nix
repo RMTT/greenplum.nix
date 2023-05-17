@@ -1,5 +1,5 @@
 { mkShell, gitui, htop, direnv, cowsay, exa, bear, openssh, _stdenv ? ""
-, greenplumDrv, name, extraPkgs ? [ ] }:
+, greenplumDrv, name, extraPkgs ? [ ], extraNativePkgs ? []}:
 
 let
   stdenv = if _stdenv == "" then greenplumDrv.stdenv else _stdenv;
@@ -25,6 +25,7 @@ let
 in shell {
   name = name;
   packages = devTools ++ extraPkgs;
+	nativeBuildInputs = extraNativePkgs;
   noDumpEnvVars = 1;
   inputsFrom = [ greenplumDrv ];
   dontStrip = true;
