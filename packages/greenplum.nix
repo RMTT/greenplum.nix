@@ -54,7 +54,7 @@ in clangStdenv.mkDerivation {
   meta = with lib; { license = licenses.asl20; };
   system = builtins.currentSystem;
   src = src;
-  makeFlags = makeFlags;
+  makeFlags = makeFlags ++ [ "SHELL=/bin/sh" ];
   preConfigure = ''
     configureFlagsArray+=(${defaultConfigureFlags})
     configureFlagsArray+=(${configureFlags})
