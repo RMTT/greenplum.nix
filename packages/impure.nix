@@ -8,9 +8,8 @@ let
       ref = "6X_STABLE";
     };
 
-    greenplum-db-main = pkgs.callPackage ./greenplum7.nix {
-      makeFlags = [ "-j8" ];
-    };
+    greenplum-db-main =
+      pkgs.callPackage ./greenplum7.nix { makeFlags = [ "-j8" ]; };
   };
 
 in repo_pkgs

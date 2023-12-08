@@ -1,4 +1,4 @@
-source $stdenv/setup
+source "$stdenv"/setup
 
 chmod -R u+w "${out}"
 

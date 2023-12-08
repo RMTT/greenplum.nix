@@ -1,12 +1,11 @@
 { pkg-config, readline, zlib, zstd, apr, libevent, libxml2, bzip2, curl, libyaml
-, gp-xerces, perl, bison, flex, python2, python3, clangStdenv, gcc, lib, ripgrep
-, makeWrapper, srcUrl ? "https://github.com/greenplum-db/gpdb.git"
+, gp-xerces, perl, bison, json_c, flex, python2, python3, clangStdenv, gcc, lib
+, clang-tools, makeWrapper, srcUrl ? "https://github.com/greenplum-db/gpdb.git"
 , version ? "main", rev ? "", ref ? "main", makeFlags ? [ ], configureFlags ? ""
 }:
-
 let
   buildDeps = [
-		gcc # need gcc for python modules even we use clang to build greenplum
+    gcc # need gcc for python modules even we use clang to build greenplum
     pkg-config
     readline
     zlib
@@ -14,6 +13,7 @@ let
     apr
     libevent
     libxml2
+    json_c
     bzip2
     curl
     libyaml
@@ -22,8 +22,7 @@ let
     bison
     flex
     python2
-    python3
-    ripgrep
+    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools ]))
   ];
 
   src = if rev == "" then
@@ -41,11 +40,11 @@ let
     };
 
   defaultConfigureFlags = ''
-    --with-libxml
-    --enable-cassert
-    --with-python
-    --with-openssl
-		--with-pythonsrc-ext
+        --with-libxml
+        --enable-cassert
+        --with-python
+        --with-openssl
+    		--with-pythonsrc-ext
   '';
 
 in clangStdenv.mkDerivation {
@@ -63,6 +62,6 @@ in clangStdenv.mkDerivation {
   postConfigure = ./scripts/pre-build-patch-shebang.sh;
   postInstall = ./scripts/make-wrapper.sh;
   postFixup = ./scripts/patch-bin.sh;
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ clang-tools makeWrapper ];
   buildInputs = buildDeps;
 }
