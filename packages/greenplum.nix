@@ -22,7 +22,7 @@ let
     bison
     flex
     python2
-    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools ]))
+    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools psutil ]))
   ];
 
   src = if rev == "" then
