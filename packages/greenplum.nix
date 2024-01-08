@@ -1,7 +1,31 @@
-{ pkg-config, readline, zlib, zstd, apr, libevent, libxml2, bzip2, curl, libyaml
-, gp-xerces, perl, bison, json_c, flex, python2, python3, clangStdenv, gcc, lib
-, clang-tools, makeWrapper, srcUrl ? "https://github.com/greenplum-db/gpdb.git"
-, version ? "main", rev ? "", ref ? "main", makeFlags ? [ ], configureFlags ? ""
+{ pkg-config
+, readline
+, zlib
+, zstd
+, apr
+, libevent
+, libxml2
+, bzip2
+, curl
+, libyaml
+, gp-xerces
+, perl
+, bison
+, json_c
+, flex
+, python2
+, python3
+, clangStdenv
+, gcc
+, lib
+, clang-tools
+, makeWrapper
+, srcUrl ? "https://github.com/greenplum-db/gpdb.git"
+, version ? "main"
+, rev ? ""
+, ref ? "main"
+, makeFlags ? [ ]
+, configureFlags ? ""
 }:
 let
   buildDeps = [
@@ -22,22 +46,24 @@ let
     bison
     flex
     python2
-    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools psutil ]))
+    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools psutil pyyaml virtualenv ]))
   ];
 
-  src = if rev == "" then
-    fetchGit {
-      url = srcUrl;
-      submodules = true;
-      ref = ref;
-    }
-  else
-    fetchGit {
-      url = srcUrl;
-      submodules = true;
-      rev = rev;
-      ref = ref;
-    };
+  src =
+    if rev == "" then
+      fetchGit
+        {
+          url = srcUrl;
+          submodules = true;
+          ref = ref;
+        }
+    else
+      fetchGit {
+        url = srcUrl;
+        submodules = true;
+        rev = rev;
+        ref = ref;
+      };
 
   defaultConfigureFlags = ''
         --with-libxml
@@ -47,7 +73,8 @@ let
     		--with-pythonsrc-ext
   '';
 
-in clangStdenv.mkDerivation {
+in
+clangStdenv.mkDerivation {
   pname = "greenplum-db";
   version = version;
 

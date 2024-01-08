@@ -1,5 +1,18 @@
-{ mkShell, gitui, htop, direnv, ripgrep, cowsay, exa, bear, openssh, _stdenv ? ""
-, greenplumDrv, name, extraPkgs ? [ ], extraNativePkgs ? [ ] }:
+{ mkShell
+, gitui
+, htop
+, direnv
+, ripgrep
+, cowsay
+, exa
+, bear
+, openssh
+, _stdenv ? ""
+, greenplumDrv
+, name
+, extraPkgs ? [ ]
+, extraNativePkgs ? [ ]
+}:
 
 let
   stdenv = if _stdenv == "" then greenplumDrv.stdenv else _stdenv;
@@ -22,7 +35,8 @@ let
   devTools = [ gitui htop cowsay exa direnv bear gpenv openssh ripgrep ];
 
   shell = mkShell.override { stdenv = stdenv; };
-in shell {
+in
+shell {
   name = name;
   packages = devTools ++ extraPkgs;
   nativeBuildInputs = extraNativePkgs;

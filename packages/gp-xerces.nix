@@ -5,7 +5,8 @@ let
     submodules = true;
     rev = "f07c17da813f44d8da17067a76491ca4b1deb02f";
   };
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   pname = "gp-xerces";
   version = "1.0";
   system = builtins.currentSystem;

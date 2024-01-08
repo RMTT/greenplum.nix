@@ -2,7 +2,7 @@
   default = gpenv;
 
   gpenv = pkgs.callPackage ./greenplum-env.nix {
-    greenplumDrv = pkgs.greenplum-db-6-23-4.override {
+    greenplumDrv = pkgs."greenplum-db-7.0.0".override {
       configureFlags = ''"--enable-debug" '';
     };
 
@@ -10,12 +10,12 @@
   };
 
   gpenv-common = pkgs.callPackage ./greenplum-env.nix {
-    greenplumDrv = pkgs.greenplum-db-6-23-4.override {
+    greenplumDrv = pkgs."greenplum-db-7.0.0".override {
       configureFlags = ''"--enable-debug" '';
     };
 
     extraNativePkgs = with pkgs; [ cmake ];
-    extraPkgs = with pkgs; [ virtualenv ant jdk8 ];
+    extraPkgs = with pkgs; [ ant jdk8 rustc cargo healpix ];
 
     name = "gpenv-common";
   };
