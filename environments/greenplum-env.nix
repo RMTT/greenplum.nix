@@ -1,10 +1,9 @@
 { mkShell
-, gitui
-, htop
-, direnv
 , ripgrep
 , cowsay
-, exa
+, minio-client
+, kubernetes-helm
+, ytt
 , bear
 , openssh
 , _stdenv ? ""
@@ -32,7 +31,7 @@ let
 
   hello_message = "Welcome to use and develop Greenplum Database";
 
-  devTools = [ gitui htop cowsay exa direnv bear gpenv openssh ripgrep ];
+  devTools = [ cowsay bear gpenv openssh ripgrep ytt ];
 
   shell = mkShell.override { stdenv = stdenv; };
 in

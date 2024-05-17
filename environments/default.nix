@@ -15,7 +15,7 @@
     };
 
     extraNativePkgs = with pkgs; [ cmake ];
-    extraPkgs = with pkgs; [ ant jdk8 rustc cargo healpix ];
+    extraPkgs = with pkgs; [ ant jdk8 rustc cargo healpix minio-client kubernetes-helm envsubst lastpass-cli ];
 
     name = "gpenv-common";
   };
