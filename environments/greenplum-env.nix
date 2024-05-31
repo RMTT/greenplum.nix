@@ -1,8 +1,6 @@
 { mkShell
 , ripgrep
 , cowsay
-, minio-client
-, kubernetes-helm
 , ytt
 , bear
 , openssh

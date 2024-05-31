@@ -1,4 +1,10 @@
-{ pkgs ? import <nixpkgs> { } }: rec {
+{ pkgs ? import <nixpkgs> { } }:
+let
+  gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
+    gke-gcloud-auth-plugin
+  ]);
+in
+rec {
   default = gpenv;
 
   gpenv = pkgs.callPackage ./greenplum-env.nix {
@@ -15,8 +21,10 @@
     };
 
     extraNativePkgs = with pkgs; [ cmake ];
-    extraPkgs = with pkgs; [ ant jdk8 rustc cargo healpix minio-client kubernetes-helm envsubst lastpass-cli ];
+    extraPkgs = with pkgs; [ ant jdk8 rustc vault gdk jsonnet cargo healpix minio-client kubernetes-helm envsubst lastpass-cli ];
 
     name = "gpenv-common";
   };
+
+  pgenv = pkgs.callPackage ./postgresql.nix { };
 }
