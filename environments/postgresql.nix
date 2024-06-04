@@ -23,7 +23,7 @@ mkShell {
     postgresql
     patroni
     zookeeper
-    (python3.withPackages (ps: with ps; [ psycopg2 setuptools ]))
+    (python3.withPackages (ps: with ps; [ psycopg2 setuptools pudb ]))
     go
     vault
     gdk
