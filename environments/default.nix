@@ -1,8 +1,5 @@
 { pkgs ? import <nixpkgs> { } }:
 let
-  gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
-    gke-gcloud-auth-plugin
-  ]);
 in
 rec {
   default = gpenv;

@@ -5,14 +5,19 @@
 , python3
 , go
 , vault
-, gdk
 , jsonnet
 , minio-client
 , kubernetes-helm
 , envsubst
 , lastpass-cli
-,
-}: mkShell {
+, google-cloud-sdk
+}:
+let
+  gdk = google-cloud-sdk.withExtraComponents (with google-cloud-sdk.components; [
+    gke-gcloud-auth-plugin
+  ]);
+in
+mkShell {
   name = "pgdev";
   packages = [
     postgresql
