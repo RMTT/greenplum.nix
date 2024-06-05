@@ -15,7 +15,7 @@
 , flex
 , python2
 , python3
-, clangStdenv
+, llvmPackages_15
 , gcc
 , lib
 , clang-tools
@@ -74,7 +74,7 @@ let
   '';
 
 in
-clangStdenv.mkDerivation {
+llvmPackages_15.stdenv.mkDerivation {
   pname = "greenplum-db";
   version = version;
 
