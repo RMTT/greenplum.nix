@@ -1,6 +1,4 @@
 { pkgs ? import <nixpkgs> { } }:
-let
-in
 rec {
   default = gpenv;
 
@@ -18,7 +16,7 @@ rec {
     };
 
     extraNativePkgs = with pkgs; [ cmake ];
-    extraPkgs = with pkgs; [ ant jdk8 rustc cargo healpix  ];
+    extraPkgs = with pkgs; [ ant jdk8 rustc cargo healpix ];
 
     name = "gpenv-common";
   };

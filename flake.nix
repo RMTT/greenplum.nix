@@ -18,7 +18,8 @@
         packages = import ./packages { pkgs = pkgs; };
         impures = import ./packages/impure.nix { pkgs = pkgs; };
         environments = import ./environments { pkgs = (pkgs // packages); };
-      in {
+      in
+      {
         packages = packages // impures;
         devShells = environments;
         formatter = pkgs.nixfmt;
