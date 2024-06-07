@@ -46,7 +46,7 @@ let
     bison
     flex
     python2
-    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools psutil pyyaml virtualenv ]))
+    (python3.withPackages (ps: with ps; [ psycopg2 jinja2 setuptools psutil pyyaml virtualenv pudb ]))
   ];
 
   src =
